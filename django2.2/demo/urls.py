@@ -18,7 +18,7 @@ from django.urls import path
 from graphene_django.views import GraphQLView
 
 from .schemas import schema
-from .views import TestView
+from .views import TestView, TestStreamView, TestSSEView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,7 @@ urlpatterns = [
 
 urlpatterns += [
     path('test', TestView.as_view(), name="test"),
+    path('test-stream', TestStreamView.as_view(), name="test-stream"),
+    path('test-sse', TestSSEView.as_view(), name="test-sse"),
+
 ]

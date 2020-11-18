@@ -43,7 +43,8 @@ class Error(BaseError):
         return f'Error {self.code}({self.status_code}): {self.message}.'
 
 
-REQUEST_JSON_ERROR = Error(10000, 'JSON请求不合法. {}')
+REQUEST_JSON_ERROR = Error(10000, 'JSON请求不合法')
+FILE_NOT_FOUND_ERROR = Error(10001, '文件不存在 {}')
 
 if __name__ == "__main__":
     import unittest
