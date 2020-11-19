@@ -1,4 +1,5 @@
 import time
+import logging
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -7,6 +8,8 @@ from django.views import View
 from django.views.generic import View
 from utils import error
 from utils.views import SSEStreamView, StreamView
+
+logger = logging.getLogger('django')
 
 
 class TestView(View):
@@ -43,7 +46,7 @@ class TestStreamView(StreamView):
         return self.TEST_FILE
 
     def close(self, request):
-        print(f'{self.now} 时的下载被关闭', request)
+        logger.info(f'{self.now} 时的下载已关闭.')
 
 
 class TestSSEView(SSEStreamView):
@@ -58,4 +61,4 @@ class TestSSEView(SSEStreamView):
             time.sleep(0.5)
 
     def close(self, request):
-        print(f'{self.now} 时接入连接被关闭', request)
+        logger.info(f'{self.now} 时接入连接已关闭.')

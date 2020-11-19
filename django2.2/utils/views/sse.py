@@ -37,8 +37,9 @@ class SSEStreamBaseView(APIViewBase):
 
     def sse_iterator(self, func, request):
         ''' 符合协议的推送数据 '''
-        _ = SSECloseStatus(request, self.close)  # 检测状态, 被释放时将触发close方法
         yield f'retry: {self.RETRY}\n\n'
+        # 这里是在第一条retry发生后再进行捕捉, 若服务未连接成功, 则不会调用close
+        _ = SSECloseStatus(request, self.close)
 
         for event in func(self, request):
             yield f'data: {event}\n\n'

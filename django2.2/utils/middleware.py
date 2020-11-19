@@ -1,6 +1,5 @@
 import json
 import logging
-from django.conf import settings
 from django.http.response import HttpResponseBase, HttpResponse
 from django.utils.deprecation import MiddlewareMixin
 from .models import DjangoJSONEncoder
@@ -18,6 +17,7 @@ class MiddlewareMixinBase(MiddlewareMixin):
         try:  # 增加JSON
             request.json = json.loads(request.body) if request_json and request.body else {}
         except Exception as e:  # 提交json错误
+            logging.error(f'{error.REQUEST_JSON_ERROR} -> {request.body}')
             raise error.REQUEST_JSON_ERROR
 
     def process_response(self, request, response):
