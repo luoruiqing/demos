@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,13 +32,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apps.chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphene_django',
+    'channels',  # WebSocket
+    'graphene_django',  # Graphql
 ]
 
 GRAPHENE = {
@@ -126,6 +129,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# ------------------------------------------------------------------------------------------
+
+ASGI_APPLICATION = "demo.asgi.application"
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 LOGGER_PATH = f'{BASE_DIR}/logs'
 os.makedirs(LOGGER_PATH, exist_ok=True)
