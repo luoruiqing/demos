@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from sqlalchemy.engine.url import _parse_rfc1738_args
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -132,14 +132,35 @@ STATIC_URL = '/static/'
 # ------------------------------------------------------------------------------------------
 
 ASGI_APPLICATION = "demo.asgi.application"
+CACHE_URL = 'redis://127.0.0.1:6379/0'
+
+
+__PARSE_CACHE = _parse_rfc1738_args(CACHE_URL)
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
+            "hosts": [(__PARSE_CACHE.host, __PARSE_CACHE.port)],
         },
     },
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{__PARSE_CACHE.host}:{__PARSE_CACHE.port}/{__PARSE_CACHE.database}",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "SOCKET_CONNECT_TIMEOUT": 5,  # 连接超时 秒
+            "SOCKET_TIMEOUT": 5,  # 读取超时
+            # "IGNORE_EXCEPTIONS": True,  # 忽略连接异常
+            # "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",  # 压缩
+            #  "COMPRESSOR": "django_redis.compressors.lzma.LzmaCompressor", # lzma 压缩
+        }
+    }
+}
+
 
 LOGGER_PATH = f'{BASE_DIR}/logs'
 os.makedirs(LOGGER_PATH, exist_ok=True)
