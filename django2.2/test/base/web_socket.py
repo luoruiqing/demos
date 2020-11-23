@@ -6,7 +6,7 @@ from django.test import TestCase
 from utils import error
 
 
-class ChannelsRedisConnectTestCase(TestCase):
+class WebSocketTestCase(TestCase):
     def test_channels_redis_connect(self):
         ''' WebSocket(Channels) 连接Redis测试 '''
         data = {'type': 'hello'}

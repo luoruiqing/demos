@@ -12,15 +12,21 @@ from django.core.cache import cache
 
 
 class Value:
-    ''' 描述符用于值代理 '''
+    ''' 描述符用于值代理, 属于本地变量, 不可以要求实时性 '''
 
     def __get__(self, instance, owner):
-        return cache.get(instance.key)
+        ''' 优先本地, 否则取数据库 '''
+        instance._v = getattr(instance, '_v', None) or cache.get(instance.key)
+        return instance._v
 
     def __set__(self, instance, value):
+        ''' 数据库同步更新 '''
+        instance._v = value
         return cache.set(instance.key, value, timeout=instance.expire)
 
     def __delete__(self, instance):
+        ''' 数据库同步删除 '''
+        instance._v = None
         return cache.delete(instance.key)
 
 
