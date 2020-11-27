@@ -45,7 +45,7 @@ class RedisTestCase(TestCase):
         self.assertIn(key2.key, _TEST_PATTERN.keys())
         # 测试字典多次加载
         print(key2.value['test'])
-        self.assertEqual(key2.value, value2)
+        self.assertEqual(key2.value.copy(), value2)
         # 清空
         _TEST_PATTERN.clear()
         self.assertNotIn(key2.key, _TEST_PATTERN.keys())
