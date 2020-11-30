@@ -21,10 +21,11 @@ from graphene_django.views import GraphQLView
 from .schemas import schema
 from .views import TestView, TestStreamView, TestSSEView
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
-
+    path('notifications/', include('notifications.urls', namespace='notifications')),
 ]
 
 urlpatterns += [
