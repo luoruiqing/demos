@@ -1,19 +1,20 @@
-from graphene.types import generic  # 通用字段
+import graphene
 from django.contrib.auth.models import User as UserModel
 from django.contrib.contenttypes.models import ContentType
+from graphene.types import generic  # 通用字段
 from graphene_django import DjangoObjectType
-import graphene
-from utils.graphql import Querier, EnumQuerier, Mutationer, Deleter
+from utils import graphql
+
 from .types import Color
 
 
-@Querier(UserModel)
-@Querier(ContentType)
+@graphql.Querier(UserModel)
+@graphql.Querier(ContentType)
 class Query:
     ''' 所有查询 '''
 
 
-@EnumQuerier(Color)
+@graphql.EnumQuerier(Color)
 class Enums:
     ''' 枚举基础类型, 传入参数类 '''
 
@@ -24,8 +25,8 @@ class QuerySet(Query, Enums, graphene.ObjectType):
 
 class MutationSet(graphene.ObjectType):
     ''' 所有修改, 根据情况配置 '''
-    MutationUser = Mutationer(UserModel).Field()
-    DeleteUser = Deleter(UserModel).Field()
+    MutationUser = graphql.Mutationer(UserModel).Field()
+    DeleteUser = graphql.Deleter(UserModel).Field()
 
 
 schema = graphene.Schema(query=QuerySet, mutation=MutationSet, auto_camelcase=False)

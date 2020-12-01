@@ -7,5 +7,5 @@ python manage.py test
 # 启动
 python manage.py runserver
 # 异步任务
-python manage.py celery beat # 定时任务生产者
+python manage.py celery beat # 定时任务生产者(只启动一个)
 python manage.py celery worker # 异步任务消费者

@@ -23,7 +23,10 @@ pnpm-debug.log*
 *.sw?
 
 **/__pycache__
+**/.venv
+*.log*
 
 # VSCode-history 插件
 **/.history
+**/db.sqlite3
 

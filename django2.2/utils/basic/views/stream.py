@@ -7,7 +7,7 @@ from django.http.response import StreamingHttpResponse
 from django.utils.encoding import escape_uri_path
 
 from .base import APIViewBase
-from utils import error
+from .. import error
 
 
 class StreamView(APIViewBase):

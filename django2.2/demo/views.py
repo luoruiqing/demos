@@ -6,8 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import View
-from utils import error
-from utils.views import SSEStreamView, StreamView
+from utils import error, views
 
 logger = logging.getLogger('django')
 
@@ -32,7 +31,7 @@ class TestView(View):
         }
 
 
-class TestStreamView(StreamView):
+class TestStreamView(views.StreamView):
     '''
     http://localhost:8000/test-stream?filename=test.py # 双参数返回文件名和路径
     http://localhost:8000/test-stream # 只返回路径, 默认名称
@@ -49,7 +48,7 @@ class TestStreamView(StreamView):
         logger.info(f'{self.now} 时的下载已关闭.')
 
 
-class TestSSEView(SSEStreamView):
+class TestSSEView(views.SSEStreamView):
     '''
     http://localhost:8000/test-sse
     '''
