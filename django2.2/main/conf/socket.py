@@ -2,7 +2,9 @@ from .default import __PARSED_CACHE, INSTALLED_APPS
 
 INSTALLED_APPS += (
     'channels',  # WebSocket
+    'apps.chat',  # 测试应用
 )
+
 
 ASGI_APPLICATION = "main.asgi.application"  # ASGI 设置
 

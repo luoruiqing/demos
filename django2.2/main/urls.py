@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import include
+from django.conf import settings
 from django.urls import path
 from graphene_django.views import GraphQLView
 
@@ -26,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
     path('notifications/', include('notifications.urls', namespace='notifications')),
+
 ]
 
 urlpatterns += [
@@ -38,3 +40,9 @@ urlpatterns += [
     path('test-sse', TestSSEView.as_view(), name="test-sse"),
 
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns += [
+        path(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

@@ -4,4 +4,4 @@ from . import middleware
 from . import views
 from . import graphql
 from . import redis
-from . import guardian
+from . import admins

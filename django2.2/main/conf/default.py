@@ -6,7 +6,7 @@ LANGUAGE_CODE = 'zh-hans'  # 语言设置
 TIME_ZONE = 'Asia/Shanghai'  # 时区设置
 
 INSTALLED_APPS += [
-    'apps.chat',
+
 ]
 
 
@@ -23,8 +23,16 @@ DATABASES = {
     }
 }
 
-
 CACHE_URL = 'redis://127.0.0.1:6379/0'
+
+# ==============================================================================
+
+try:
+    from ..local_setttings import *  # 动态导入配置文件
+except ModuleNotFoundError as e:
+    pass
+
+
 __PARSED_CACHE = _parse_rfc1738_args(CACHE_URL)
 
 
