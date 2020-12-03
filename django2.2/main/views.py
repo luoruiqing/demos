@@ -36,7 +36,7 @@ class TestStreamView(views.StreamView):
     http://localhost:8000/test-stream?filename=test.py # 双参数返回文件名和路径
     http://localhost:8000/test-stream # 只返回路径, 默认名称
     '''
-    TEST_FILE = './demo/views.py'
+    TEST_FILE = './main/views.py'
 
     def get(self, request):
         self.now = time.time()

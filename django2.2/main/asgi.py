@@ -1,5 +1,5 @@
 """
-ASGI config for demo project.
+ASGI config for main project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -17,7 +17,7 @@ from channels.routing import ProtocolTypeRouter
 import apps.chat.routing
 
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demo.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
 django.setup()
 
 application = ProtocolTypeRouter({

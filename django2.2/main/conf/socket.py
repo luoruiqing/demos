@@ -4,7 +4,7 @@ INSTALLED_APPS += (
     'channels',  # WebSocket
 )
 
-ASGI_APPLICATION = "demo.asgi.application"  # ASGI 设置
+ASGI_APPLICATION = "main.asgi.application"  # ASGI 设置
 
 CHANNEL_LAYERS = {  # WebSocket 依赖
     'default': {

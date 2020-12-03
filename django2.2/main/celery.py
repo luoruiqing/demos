@@ -6,11 +6,11 @@ import os
 
 from celery import Celery
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'demo.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'main.settings')
 # Specifying the settings here means the celery command line program will know where your Django project is.
 # This statement must always appear before the app instance is created, which is what we do next:
 
-app = Celery('demo')
+app = Celery('main')
 
 app.config_from_object('django.conf:settings')
 # This means that you don’t have to use multiple configuration files, and instead configure Celery directly from the Django settings.

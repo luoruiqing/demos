@@ -7,5 +7,5 @@ INSTALLED_APPS += [
 
 
 GRAPHENE = {
-    'SCHEMA': 'demo.schema.schema'
+    'SCHEMA': 'main.schema.schema'
 }
