@@ -3,6 +3,7 @@ from .default import *  # 自定义地域/数据库/连接等配置
 from .logs import *  # 日志配置及颜色扩展
 from .graphql import *  # Graphql 扩展
 from .celery import *  # 异步任务扩展
+from .constance import *  # 程序读取动态配置
 from .account import *  # 用户扩展
 from .guardian import *  # 对象权限(行权限)
 from .reversion import *  # 历史记录及回滚
