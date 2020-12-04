@@ -2,7 +2,6 @@ import traceback
 from django.db import models
 from urllib.parse import unquote
 from django.contrib.auth.models import Group
-from django.conf import settings
 from guardian.core import ObjectPermissionChecker
 from guardian.admin import GuardedModelAdmin
 from guardian.shortcuts import get_perms, get_objects_for_user, get_objects_for_group, assign_perm, remove_perm, get_users_with_perms, get_groups_with_perms

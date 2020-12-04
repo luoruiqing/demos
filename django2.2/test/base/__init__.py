@@ -2,6 +2,7 @@ from .middleware import MTDMiddlewareTestCase
 from .sse import SSETestCase
 from .web_socket import WebSocketTestCase
 from .redis import RedisTestCase
+from .logger import LoggerTestCase
 # from .base.database import *
 
 
@@ -13,5 +14,6 @@ def main():
     # 下载模块测试
     # 基础服务测试 ------------------------------------------------------------
     #  数据库连接测试
-    RedisTestCase.main()  # 缓存数据库
+    # RedisTestCase.main()  # 缓存数据库
+    LoggerTestCase.main()  # 日志颜色测试
     # 业务相关测试
