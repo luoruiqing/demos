@@ -11,7 +11,7 @@ INSTALLED_APPS += [
 
 
 MIDDLEWARE += [
-    'utils.basic.middleware.MTDMiddleware',
+    'utils.basic.middlewares.custom.MTDMiddleware',
 ]
 
 

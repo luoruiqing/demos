@@ -1,6 +1,7 @@
 from .default import *  # 自定义地域/数据库/连接等配置
 # -- 扩展
-from .logs import *  # 日志配置及颜色扩展
+from .logger import *  # 日志配置及颜色扩展
+from .admin_menu import *  # Admin 菜单扩展
 from .graphql import *  # Graphql 扩展
 from .celery import *  # 异步任务扩展
 from .constance import *  # 程序读取动态配置

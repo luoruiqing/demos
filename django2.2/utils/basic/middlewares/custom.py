@@ -2,8 +2,8 @@ import json
 import logging
 from django.http.response import HttpResponseBase, HttpResponse
 from django.utils.deprecation import MiddlewareMixin
-from .models import DjangoJSONEncoder
-from . import error
+from ..models import DjangoJSONEncoder
+from .. import error
 
 
 class MiddlewareMixinBase(MiddlewareMixin):
