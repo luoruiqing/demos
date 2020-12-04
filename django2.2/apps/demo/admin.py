@@ -5,6 +5,6 @@ from utils.basic.admins import guardian, taggit, reversion
 
 
 @admin.register(TestModel1)
-class TestModel1Admin(guardian.GuardianAdmin, taggit.TaggitAdmin, reversion.VersionAdmin):
+class TestModel1Admin(guardian.GuardianAdmin, taggit.TaggitAdmin, reversion.CompareVersionAdmin):
     ''' 对象权限 '''
     list_display = list_display_links = ('id', 'name')

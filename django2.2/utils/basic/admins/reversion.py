@@ -1,1 +1,2 @@
 from reversion.admin import VersionAdmin
+from reversion_compare.admin import CompareVersionAdmin
