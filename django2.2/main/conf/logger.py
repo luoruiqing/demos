@@ -1,8 +1,12 @@
 import os
-from .default import BASE_DIR
+from .default import BASE_DIR, MIDDLEWARE
 
 LOGGER_PATH = f'{BASE_DIR}/logs'
 
+MIDDLEWARE.insert(  # 必须依赖默认用户模块, 并在该模块后
+    MIDDLEWARE.index('django.contrib.auth.middleware.AuthenticationMiddleware') + 1,
+    'utils.basic.middlewares.log_user.LoggingUserMiddleware'
+)
 
 LOGGING = {
     'version': 1,
