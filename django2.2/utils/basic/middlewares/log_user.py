@@ -10,14 +10,16 @@ class LoggingUserMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         try:
-            data = [
-                request.user.id,
-                request.user.first_name,
-                request.user.last_login,
-                request.META,
-                request.COOKIES,
-                # request.session,
-            ]
-            logger.info(' '.join(map(str, data)))
+            if request.user.is_authenticated:
+                data = [
+                    f'({request.user.id})',
+                    request.user.first_name,
+                    request.user.last_login,
+                    request.META,
+                    request.COOKIES,
+                    # request.session,
+                ]
+                logger.info(' '.join(map(str, data)))
         except:
-            pass
+            import traceback
+            traceback.print_exc()
