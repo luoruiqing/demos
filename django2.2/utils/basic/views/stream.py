@@ -6,15 +6,15 @@ from pathlib import Path
 from django.http.response import StreamingHttpResponse
 from django.utils.encoding import escape_uri_path
 
-from .base import APIViewBase
 from .. import error
+from .base import ViewBase
 
 
-class StreamView(APIViewBase):
+class StreamView(ViewBase):
     """ 二进制流式下载文件 """
     CHUNK_SIZE = 1024 * 256
 
-    def _custom_process(func):
+    def wrapper_process(func):
         @functools.wraps(func)
         def wrapper(self, request, *args, **kwargs):
             fileargs = func(self, request)

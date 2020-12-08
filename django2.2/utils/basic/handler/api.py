@@ -1,13 +1,11 @@
 import json
 import logging
 from django.http.response import HttpResponseBase, HttpResponse
-from django.utils.deprecation import MiddlewareMixin
-from ..models import DjangoJSONEncoder
 from .. import error
 
 
-class MiddlewareMixinBase(MiddlewareMixin):
-    ''' 基础中间件, 用于请求前JSON校验, 响应后格式统一, 错误后格式统一 '''
+class APIHandler:
+    ''' 自定义的处理模式, 用于请求前JSON校验, 响应后格式统一, 已知错误后格式统一 '''
     DEFAULT_RESPONSE_JSON = {"code": 200, 'message': "success"}
 
     JSONEncoder = json.JSONEncoder  # json转换器
@@ -32,8 +30,3 @@ class MiddlewareMixinBase(MiddlewareMixin):
         # 处理已知错误
         if isinstance(e, error.BaseError):
             return HttpResponse(json.dumps({"code": e.code, 'message': e.message}), status=e.status_code, content_type='application/json')
-
-
-class MTDMiddleware(MiddlewareMixinBase):
-    ''' 模型转换支持 '''
-    JSONEncoder = DjangoJSONEncoder

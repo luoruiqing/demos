@@ -10,9 +10,6 @@ class BaseError(BaseException):
 
 class Error(BaseError):
     ''' 自定义错误类 '''
-    # status_code = 400  # 默认错误响应状态码
-    # code = None  # 错误代码
-    # message = ''  # 错误消息
 
     def __new__(cls, code, *args, **kwargs):
         check = kwargs.pop('check', True)

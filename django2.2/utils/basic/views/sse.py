@@ -1,6 +1,8 @@
 import functools
-from .base import APIViewBase
+
 from django.http.response import StreamingHttpResponse
+
+from .base import ViewBase
 
 
 class SSECloseStatus:
@@ -14,7 +16,7 @@ class SSECloseStatus:
         return self.callback(self.request)
 
 
-class SSEStreamBaseView(APIViewBase):
+class SSEStreamBaseView(ViewBase):
     ''' SSE 传输信息'''
 
     RETRY = 3000  # 重试间隔时间(毫秒)
@@ -23,7 +25,7 @@ class SSEStreamBaseView(APIViewBase):
     CONTENT_ENCODING = 'none'  # 内容编码 (默认关闭压缩)
     X_ACCEL_BUFFERING = 'no'  # Nginx关闭缓存设置
 
-    def _custom_process(func):
+    def wrapper_process(func):
         @functools.wraps(func)
         def wrapper(self, request, *args, **kwargs):
             response = StreamingHttpResponse(self.sse_iterator(func, request), content_type='text/event-stream')

@@ -1,2 +1,2 @@
-from .custom import MiddlewareMixinBase, MTDMiddleware
+from .api import APIMiddleware
 from .log_user import LoggingUserMiddleware
