@@ -53,7 +53,7 @@ class GrapDjangoModelQueryBase(GrapDjangoModel):
             'page': graphene.Int(description="页数"),
             'filter': generic.GenericScalar(description="Django Model filters 查询参数"),
             'exclude': generic.GenericScalar(description="Django Model exclude 查询参数"),
-            'order_by': graphene.String(description="Django Model order_by 查询参数"),
+            'order_by': generic.GenericScalar(description="Django Model order_by 查询参数, 列表或字符"),
         }
 
     def __call__(self, cls):

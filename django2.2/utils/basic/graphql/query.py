@@ -12,5 +12,6 @@ class GrapDjangoModelQuery(GrapDjangoModelQueryBase):
         query = self.model.objects.filter(**kwargs.get('filter', {}))
         query = query.exclude(**kwargs.get('exclude', {}))
         if 'order_by' in kwargs:
-            query = query.order_by(kwargs['order_by'])
+            order_by = kwargs['order_by'] if isinstance(kwargs['order_by'], list) else [kwargs['order_by']]
+            query = query.order_by(*order_by)
         return self.QueryModel(data=query[page * limit - limit:page * limit], total=query.count())
