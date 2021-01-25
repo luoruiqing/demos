@@ -13,7 +13,7 @@ from .types import Color
 TagQuery = graphql.GrapDjangoModelQuery(taggit.models.Tag)
 
 @graphene_django.converter.convert_django_field.register(taggit.managers.TaggableManager)
-def convert_geofield_to_string(field, registry=None):
+def convert_taggit(field, registry=None):
      return graphene_django.DjangoListField(TagQuery.model_type, description=field.help_text, required=not field.null)
 
 
