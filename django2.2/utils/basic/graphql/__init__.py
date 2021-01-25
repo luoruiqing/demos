@@ -1,3 +1,4 @@
+from .middleware import AuthorizationMiddleware
 from .query import GrapDjangoModelQuery
 from .enum import GrapEnumQuery
 from .mutation import GrapDjangoModelMutation
